@@ -41,10 +41,10 @@ jobs:
           set -o pipefail
           xcodebuild build -project TouchTVGuide.xcodeproj -scheme TouchTVGuide -configuration Release \
             -destination "generic/platform=iOS Simulator" CODE_SIGNING_ALLOWED=NO -derivedDataPath build-release 2>&1 | tail -5
-          plutil -extract TVGLiveFeedEnabled raw "build-release/Build/Products/Release-iphonesimulator/Touch TV Guide.app/Info.plist" | grep -qx NO
+          plutil -extract TVGLiveFeedEnabled raw "build-release/Build/Products/Release-iphonesimulator/TouchTVGuide.app/Info.plist" | grep -qx NO
       - name: Package simulator build (unsigned)
         run: |
-          cd "build-release/Build/Products/Release-iphonesimulator" && zip -qr "$GITHUB_WORKSPACE/TouchTVGuide-simulator-Release.zip" "Touch TV Guide.app"
+          cd "build-release/Build/Products/Release-iphonesimulator" && zip -qr "$GITHUB_WORKSPACE/TouchTVGuide-simulator-Release.zip" "TouchTVGuide.app"
       - uses: actions/upload-artifact@v4
         if: always()
         with:
