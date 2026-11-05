@@ -17,7 +17,10 @@ jobs:
         run: brew install xcodegen
       - name: Core package tests (parser, rules, repository)
         working-directory: Packages/TVGuideCore
-        run: swift test 2>&1 | tee ../../core-tests.log
+        run: |
+          set -o pipefail
+          swift test 2>&1 | tee ../../core-tests.log
+          grep -E "Executed [0-9]+ tests" ../../core-tests.log | tail -1
       - name: Generate Xcode project
         run: xcodegen generate
       - name: Pick an iPhone simulator

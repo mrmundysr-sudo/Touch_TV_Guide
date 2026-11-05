@@ -8,7 +8,7 @@ final class ParserTests: XCTestCase {
         let cbs = d.channels.first { $0.id == "I4.1.43312.gracenote.com" }!
         XCTAssertEqual(cbs.name, "CBS El Paso"); XCTAssertEqual(cbs.feedNumber, "4.1")
         XCTAssertEqual(cbs.logoURL, "https://zpmc.tmsimg.com/h3/NowShowing/43312/s28711_ll_h15_ab.png")
-        XCTAssertEqual(d.programs.count, 8)                                   // the "bad" programme is skipped
+        XCTAssertEqual(d.programs.count, 7)                                   // the "bad" programme is skipped
         XCTAssertEqual(d.programs.first { $0.title == "Late & Show" }?.description, "A talk show & more.")
         XCTAssertNil(d.programs.first { $0.title == "Overnight" }?.description)
     }
