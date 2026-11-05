@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Touch TV Guide</string>
+    <string name="back">Back</string>
+    <string name="next">Next</string>
+    <string name="cancel">Cancel</string>
+    <string name="save">Save</string>
+    <string name="reset">Reset</string>
+    <string name="continue_">Continue</string>
+    <string name="not_now">Not now</string>
+    <string name="search">Search</string>
+    <string name="refresh">Refresh</string>
+    <string name="settings">Settings</string>
+    <string name="channels">Channels</string>
+    <string name="programs">Programs</string>
+
+    <!-- setup -->
+    <string name="setup_title">Set up your guide</string>
+    <string name="setup_step">Step %1$d of %2$d</string>
+    <string name="setup_zip_head">Where are you?</string>
+    <string name="setup_zip_body">Enter your zip code so the guide can show your local channels. Your zip stays on this device. There is no account.</string>
+    <string name="setup_zip_label">Zip code</string>
+    <string name="setup_zip_invalid">Enter a 5-digit US zip code.</string>
+    <string name="setup_use_location">Use my approximate location</string>
+    <string name="setup_location_why_title">Use your location?</string>
+    <string name="setup_location_why">Android will ask for your approximate location. The app reads the last location your phone already knows, uses it once to suggest a zip code, and does not store or send it anywhere. You can always type your zip instead.</string>
+    <string name="setup_location_found">Suggested zip %1$s from your approximate location. Change it if it isn\'t right.</string>
+    <string name="setup_location_none">Your phone doesn\'t have a recent location. Please type your zip code.</string>
+    <string name="setup_location_denied">Location permission was not granted. No problem: type your zip code instead.</string>
+    <string name="setup_market_head">Pick your local market</string>
+    <string name="setup_market_body">These are the nearest markets to your zip. The nearest isn\'t always the one your stations broadcast from, so choose the one that matches your local news.</string>
+    <string name="setup_market_filter">Search markets</string>
+    <string name="setup_all_markets">Show all markets</string>
+    <string name="setup_nearest">Show nearest only</string>
+    <string name="setup_zip_unknown">That zip isn\'t in the built-in table. Show all markets to pick yours.</string>
+    <string name="setup_provider_head">How do you watch TV?</string>
+    <string name="setup_provider_body">This just labels your guide. The guide lists your market\'s local channels and cannot know which channels your plan includes, so use Edit number on a channel to match your lineup.</string>
+    <string name="setup_finish">Show my guide</string>
+
+    <!-- guide -->
+    <string name="grid_channel">Channel</string>
+    <string name="no_listings">No listings</string>
+    <string name="filter_all">All</string>
+    <string name="filter_favorites">Favorites</string>
+    <string name="earlier">Earlier</string>
+    <string name="now">Now</string>
+    <string name="later">Later</string>
+    <string name="listings_end">Listings end %1$s</string>
+    <string name="showing_saved">Showing your saved guide.</string>
+    <string name="no_favorites">No favorite channels yet. Tap a channel and choose Favorite.</string>
+    <string name="no_channels_in_filter">No channels here yet. Tap a channel to give it this category.</string>
+    <string name="loading_guide">Downloading the guide for %1$s…</string>
+    <string name="error_no_saved_guide">There is no saved guide on this device yet.</string>
+    <string name="try_again">Try again</string>
+    <string name="no_guide_yet">No guide has been downloaded yet.</string>
+    <string name="download_guide">Download guide</string>
+    <string name="cd_program">%1$s, %2$s</string>
+    <string name="cd_favorite">favorite</string>
+    <string name="cd_reminder_set">reminder set</string>
+
+    <!-- details -->
+    <string name="on_now">On now</string>
+    <string name="no_description">No description available for this program.</string>
+    <string name="favorite">Favorite</string>
+    <string name="unfavorite">Unfavorite</string>
+    <string name="remind_me">Remind me</string>
+    <string name="cancel_reminder">Cancel reminder</string>
+    <string name="cancel_reminder_for">Cancel reminder for %1$s</string>
+    <string name="reminder_past">This program has already started, so a reminder can\'t be set.</string>
+    <string name="channel_number">Channel number</string>
+    <string name="number_hint">Leave empty to show "?". Use Edit number to match your own lineup.</string>
+    <string name="number_clash">%1$s already uses this number and will show "?" instead.</string>
+    <string name="category">Category</string>
+    <string name="category_hint">Optional, for example News or Sports. Shows up as a filter at the top.</string>
+
+    <!-- search -->
+    <string name="search_hint">Channel, number, show or description</string>
+    <string name="search_prompt">Type to search channels and programs.</string>
+    <string name="search_none">Nothing found for "%1$s".</string>
+    <string name="on_now_next">%1$s · %2$s</string>
+
+    <!-- reminders -->
+    <string name="reminders">Reminders</string>
+    <string name="reminders_count">%1$d set</string>
+    <string name="no_reminders">No reminders. Open a program and tap Remind me.</string>
+    <string name="notifications_off">Notifications are off, so reminders can\'t alert you. Turn them on in system settings.</string>
+    <string name="notifications_denied">Reminders need notification permission. You can turn it on in system settings.</string>
+    <string name="open_settings">Open settings</string>
+    <string name="notif_why_title">Allow notifications?</string>
+    <string name="notif_why">Reminders appear as a notification shortly before a show starts. Android needs your permission to show it.</string>
+    <string name="reminder_channel">Show reminders</string>
+    <string name="reminder_channel_desc">Alerts shortly before a show you chose starts.</string>
+    <string name="reminder_text">Starting soon on %1$s</string>
+    <string name="reminder_text_nochannel">Starting soon</string>
+
+    <!-- settings -->
+    <string name="sec_guide">Guide</string>
+    <string name="sec_look">Appearance</string>
+    <string name="sec_reminders">Reminders</string>
+    <string name="sec_data">Data source</string>
+    <string name="sec_about">About</string>
+    <string name="home_summary">Zip %1$s · %2$s</string>
+    <string name="last_updated">Last updated</string>
+    <string name="never">Never</string>
+    <string name="refresh_note">The guide is downloaded at most once a day to be kind to the free data source. Refreshing sooner just re-checks what is saved.</string>
+    <string name="change_home">Change location or provider</string>
+    <string name="change_home_sub">Re-run setup</string>
+    <string name="change_home_confirm">This replaces your Home setup. If you pick a different market, your channel numbers, categories, favorites and reminders for the old market are removed. Nothing changes if you cancel.</string>
+    <string name="reset_custom">Reset numbers and categories</string>
+    <string name="reset_custom_sub">Favorites are kept</string>
+    <string name="reset_confirm">This clears the channel numbers and categories you set. Favorites are kept.</string>
+    <string name="theme">Theme</string>
+    <string name="theme_system">System</string>
+    <string name="theme_light">Light</string>
+    <string name="theme_dark">Dark</string>
+    <string name="text_size">Text size</string>
+    <string name="size_small">Small</string>
+    <string name="size_default">Default</string>
+    <string name="size_large">Large</string>
+    <string name="size_xl">Largest</string>
+    <string name="lead_time">Remind me before a show starts</string>
+    <string name="lead_5">5 min</string>
+    <string name="lead_10">10 min</string>
+    <string name="lead_15">15 min</string>
+    <string name="lead_30">30 min</string>
+    <string name="feed_address">Guide feed address</string>
+    <string name="feed_note">Must start with https://. Changing it downloads the guide again from the new address.</string>
+    <string name="feed_invalid">Enter a full https:// address.</string>
+    <string name="use_default">Use default</string>
+    <string name="version">Version %1$s</string>
+    <string name="sources_short">Listings: EPGTalk. Zip positions: US Census data.</string>
+
+    <!-- help -->
+    <string name="help_title">Help and guide</string>
+    <string name="help_h_start">Getting started</string>
+    <string name="help_b_start">On first launch, enter your zip (or let the app suggest one), pick your local market, and say how you watch TV. The guide downloads and opens. You can redo setup any time in Settings.</string>
+    <string name="help_h_grid">Reading the guide</string>
+    <string name="help_b_grid">Channels run down the left, time runs across. Swipe sideways for later shows or use Earlier, Now and Later. The gold line is the current time. The guide ends where the listings end, about three days out. Tap a show for details. A channel with nothing scheduled says "No listings".</string>
+    <string name="help_h_channels">Channel numbers and categories</string>
+    <string name="help_b_channels">Tap a channel to change its number, give it a category, or mark it a favorite. If you give a channel a number another channel already uses, the other one shows "?" until you give it a number. Channels with "?" sort last. Categories you create appear as filters above the guide. Reset in Settings clears numbers and categories but keeps favorites.</string>
+    <string name="help_h_fav">Favorites</string>
+    <string name="help_b_fav">Favorite a channel from its menu, or a single show from its details. Use the Favorites filter to see just your favorite channels, in number order.</string>
+    <string name="help_h_search">Search</string>
+    <string name="help_b_search">Search finds channels by name or number, and programs by title or description, listed in channel-number order.</string>
+    <string name="help_h_rem">Reminders</string>
+    <string name="help_b_rem">Open an upcoming show and tap Remind me. The first time, Android asks to allow notifications; without it reminders can\'t alert you. Manage or cancel reminders in Settings. Reminders survive restarts and are dropped if the show disappears from the guide. They can arrive a minute or two off, because Android groups background alarms to save battery.</string>
+    <string name="help_h_offline">Offline use and refresh</string>
+    <string name="help_b_offline">The guide is saved on your phone and works without a connection. It refreshes in the background about once a day. If a refresh fails, you keep the saved guide, your numbers, favorites and reminders.</string>
+    <string name="help_h_privacy">Privacy</string>
+    <string name="help_b_privacy">No account, no ads, no tracking. Your zip, choices, favorites and reminders are stored only on this device. Location is optional: if you allow it, the app reads your phone\'s last known approximate location once to suggest a zip, and does not keep or send it. The only network request the app makes is downloading the public guide file.</string>
+    <string name="help_h_sources">Where the data comes from</string>
+    <string name="help_b_sources">Listings come from EPGTalk\'s free public TV guide (epgtalk.com), used with the maintainer\'s approval. Zip code positions are derived from US Census Bureau data (via the open-source US-Zip-Codes-JSON list, MIT license). The market list follows EPGTalk\'s US Local coverage.</string>
+    <string name="help_h_limits">Good to know</string>
+    <string name="help_b_limits">This is a guide, not a player: it doesn\'t play TV or video. Listings are per local market, not per provider, so your provider may not carry every channel shown and its numbers may differ; edit numbers to match. Zip codes are matched to the nearest market, which can differ from your actual broadcast area; pick another in Change location if needed. Listings can contain errors and are only as good as the source.</string>
+</resources>

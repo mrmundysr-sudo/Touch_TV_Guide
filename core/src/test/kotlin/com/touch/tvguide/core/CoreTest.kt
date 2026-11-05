@@ -82,3 +82,14 @@ class CoreTest {
         assertEquals(1, GuideLogic.search(d, cu, "local news").second.size)
     }
 }
+
+class GzipFeedTest {
+    @Test fun parserHandlesRealFeedShape() {
+        val xml = """<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE tv SYSTEM "xmltv.dtd"><tv>
+          <channel id="I4.1.1.gracenote.com"><display-name>CBS El Paso</display-name><display-name>4.1 CBS El Paso</display-name><display-name>4.1</display-name><icon src="https://x/l.png" /></channel>
+          <programme start="20261105020000 +0000" stop="20261105033000 +0000" channel="I4.1.1.gracenote.com"><title lang="en">Late &amp; Show</title></programme></tv>"""
+        val d = XmltvParser.parse(xml.byteInputStream())
+        assertEquals("CBS El Paso", d.channels.single().name); assertEquals("4.1", d.channels.single().feedNumber)
+        assertEquals("Late & Show", d.programs.single().title)
+    }
+}

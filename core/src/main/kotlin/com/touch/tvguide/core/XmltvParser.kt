@@ -15,6 +15,8 @@ object XmltvParser {
         val programs = ArrayList<Program>()
         val parser = SAXParserFactory.newInstance().newSAXParser()
         parser.parse(InputSource(input), object : DefaultHandler() {
+            // The real feed starts with <!DOCTYPE tv SYSTEM "xmltv.dtd">; never try to load it.
+            override fun resolveEntity(publicId: String?, systemId: String?): InputSource = InputSource(java.io.StringReader(""))
             private val text = StringBuilder()
             private var chId: String? = null
             private val names = ArrayList<String>()

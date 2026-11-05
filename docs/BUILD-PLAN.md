@@ -1,8 +1,8 @@
 # Touch TV Guide — Android-first build plan
 
 Branch: `claude/android`  
-Status: **ready to execute one milestone at a time**  
-Authority: follow `docs/DECISIONS.md` for stacks, caching, branches, and EPGTalk posture (owner-approved 2026-11-05). **Monetization in this file supersedes** the older “none in v1” line in DECISIONS — update DECISIONS in a later docs commit to match. `docs/PLAN.md` remains the feasibility audit; where PLAN and this file disagree on product rules, **this build plan + DECISIONS (as amended here) win**.
+Status: **Milestones 1–6 implemented on this branch; Milestone 7 (monetization) is CANCELLED by owner handoff; Milestone 8 partly done (debug APK, CI) — store signing/release awaits owner approval.**  
+Authority: follow `docs/DECISIONS.md` (updated with the owner handoff in `CLAUDE_FINISH_INSTRUCTIONS.md`). **The owner handoff supersedes this file where they disagree:** the app has **no monetization of any kind** (no rewarded ads, billing or subscription) unless Matthew later approves it, and **EPGTalk approval has been obtained** (see DECISIONS), so the “maintainer will not be contacted” text below is stale. `docs/PLAN.md` remains the feasibility audit; where PLAN and this file disagree on product rules, **this build plan + DECISIONS (as amended here) win**.
 
 Goal: ship a usable Android app on top of the existing JVM `:core` module, then port to iOS. This document is the Android track only. Do **not** merge to `main` without owner approval.
 
@@ -14,7 +14,7 @@ Do these before writing `:app` code. They are not blockers for scaffolding, but 
 
 | Item | Current decision | What to confirm / do |
 |---|---|---|
-| **EPGTalk licensing** | Maintainer will **not** be contacted (`docs/DECISIONS.md`). Keep use **personal-scale and conservative**. | Treat as open risk for any non-personal release. Fetch only from the public feed URL (config), cache **on device**, refresh at most daily. Make the feed URL easy to swap. Do not redistribute EPGTalk data from our own host/CDN. |
+| **EPGTalk licensing** | ~~Maintainer will not be contacted~~ **Superseded:** the owner reports EPGTalk approval was obtained; exact wording still needs to be filed in the repo before a store release (`docs/DECISIONS.md`). Keep fetching conservative regardless. | Treat as open risk for any non-personal release. Fetch only from the public feed URL (config), cache **on device**, refresh at most daily. Make the feed URL easy to swap. Do not redistribute EPGTalk data from our own host/CDN. |
 | Caching | **On-device cache only.** No server-side mirror. | Stick to Room (+ optional raw XML file on disk). No GitHub Releases/Pages mirror. |
 | **Monetization (authoritative)** | See below. **Banner ads are explicitly REJECTED** — do not add banner/interstitial inventory or bottom-banner UI in any milestone. | Implement only: (1) rewarded day-pass, (2) one-time unlock, (3) Touch-family subscription. Record product IDs and Play Billing / AdMob (rewarded-only) setup before Milestone 7. Sync `docs/DECISIONS.md` when convenient. |
 | Feed window | EPGTalk US local ≈ **72 hours**, ~140 markets. | Bound right-arrow / day picker with `GuideLogic.dataEnd`. Do not hard-code 7 days. |
@@ -241,7 +241,9 @@ Locked / free tier behavior (define precisely in M7): until unlocked, allow setu
 
 ---
 
-## Milestone 7 — Monetization (rewarded day-pass, one-time buy, Touch-family subscription)
+## Milestone 7 — ~~Monetization~~ CANCELLED (superseded by owner handoff)
+
+> **Not implemented, by decision.** `CLAUDE_FINISH_INSTRUCTIONS.md`: *no banner, interstitial or persistent display ads; do not add monetization unless Matthew later approves it.* The app has no ad SDK, billing library, entitlement model or paywall. The text below is kept only as history of the earlier proposal.
 
 **Why here:** Core product (guide, setup, reminders) should work first; then gate “complete app” behind the three approved unlock paths. **Banner ads remain forbidden** in this milestone and afterward.
 

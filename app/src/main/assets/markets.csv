@@ -1,0 +1,139 @@
+id,name,state,lat,lon
+abilene-tx,Abilene,TX,32.3754,-99.8123
+albany-ny,Albany,NY,42.6318,-73.9273
+albuquerque-nm,Albuquerque,NM,35.0718,-106.6241
+altoona-pa,Altoona,PA,40.4998,-78.3808
+ames-ia,Ames,IA,42.0333,-93.6004
+anchorage-ak,Anchorage,AK,61.1482,-149.6848
+annapolis-md,Annapolis,MD,38.9911,-76.5626
+atlanta-ga,Atlanta,GA,33.8307,-84.4001
+augusta-ga,Augusta,GA,33.4115,-82.0818
+austin-tx,Austin,TX,30.3179,-97.7575
+baltimore-md,Baltimore,MD,39.3088,-76.6184
+bangor-me,Bangor,ME,45.2908,-68.7632
+baton-rouge-la,Baton Rouge,LA,30.4756,-91.0996
+beaumont-tx,Beaumont,TX,30.0247,-94.1564
+boise-id,Boise,ID,43.5011,-116.2303
+boston-ma,Boston,MA,42.3428,-71.0029
+buffalo-ny,Buffalo,NY,42.8599,-78.8435
+cape-girardeau-mo,Cape Girardeau,MO,37.3356,-89.584
+cedar-rapids-ia,Cedar Rapids,IA,42.0549,-91.6483
+charleston-sc,Charleston,SC,32.8343,-79.9214
+charlotte-nc,Charlotte,NC,35.2401,-80.8152
+chattanooga-tn,Chattanooga,TN,35.0787,-85.2584
+chicago-il,Chicago,IL,41.8343,-87.6982
+cincinnati-oh,Cincinnati,OH,39.1655,-84.4969
+cleveland-oh,Cleveland,OH,41.561,-81.6497
+colorado-springs-co,Colorado Springs,CO,38.8425,-104.6712
+columbia-sc,Columbia,SC,34.0151,-80.9877
+columbus-oh,Columbus,OH,39.9775,-82.9788
+corpus-christi-tx,Corpus Christi,TX,27.767,-97.4806
+dallas-tx,Dallas,TX,32.7784,-96.7693
+dayton-oh,Dayton,OH,39.7459,-84.216
+denver-co,Denver,CO,39.7428,-104.832
+detroit-mi,Detroit,MI,42.2539,-83.1627
+dothan-al,Dothan,AL,31.168,-85.3779
+duluth-mn,Duluth,MN,47.0226,-92.1914
+el-paso-tx,El Paso,TX,31.7138,-106.3191
+fairbanks-ak,Fairbanks,AK,64.853,-147.4905
+flint-mi,Flint,MI,43.0119,-83.7155
+fort-myers-fl,Fort Myers,FL,26.5807,-81.8802
+fort-smith-ar,Fort Smith,AR,35.257,-94.3028
+fort-worth-tx,Fort Worth,TX,32.787,-97.298
+fresno-ca,Fresno,CA,36.756,-119.6834
+grand-junction-co,Grand Junction,CO,39.0766,-108.573
+grand-rapids-mi,Grand Rapids,MI,42.9885,-85.591
+green-bay-wi,Green Bay,WI,44.4864,-87.9972
+greensboro-nc,Greensboro,NC,36.083,-79.9387
+greenville-sc,Greenville,SC,34.866,-82.3916
+hamtramck-mi,Hamtramck,MI,42.2399,-83.1508
+hardeeville-sc,Hardeeville,SC,32.244,-81.0748
+harrisburg-pa,Harrisburg,PA,40.2828,-76.8578
+harrisonburg-va,Harrisonburg,VA,38.4516,-78.8588
+hartford-ct,Hartford,CT,41.7864,-72.7037
+hawaii-hi,Hawaii,HI,24.4913,-166.9004
+houston-tx,Houston,TX,29.8087,-95.412
+huntsville-al,Huntsville,AL,34.7235,-86.5656
+indianapolis-in,Indianapolis,IN,39.7963,-86.1388
+jackson-ms,Jackson,MS,32.3142,-90.299
+jacksonville-fl,Jacksonville,FL,30.302,-81.6612
+jefferson-city-mo,Jefferson City,MO,38.5293,-92.2462
+johnson-city-tn,Johnson City,TN,36.2912,-82.4526
+kansas-city-mo,Kansas City,MO,39.0941,-94.4976
+kirksville-mo,Kirksville,MO,40.1657,-92.6095
+knoxville-tn,Knoxville,TN,35.9737,-83.9577
+lansing-mi,Lansing,MI,42.6786,-84.5234
+laredo-tx,Laredo,TX,27.5296,-99.4968
+las-vegas-nv,Las Vegas,NV,36.0626,-115.1151
+lincoln-ne,Lincoln,NE,40.8314,-96.6899
+little-rock-ar,Little Rock,AR,34.7572,-92.352
+longview-tx,Longview,TX,32.4814,-94.7495
+los-angeles-ca,Los Angeles,CA,33.8079,-118.2906
+louisville-ky,Louisville,KY,38.1997,-85.6841
+lubbock-tx,Lubbock,TX,33.5797,-101.8763
+macon-ga,Macon,GA,32.8159,-83.6725
+madison-wi,Madison,WI,43.0707,-89.4061
+memphis-tn,Memphis,TN,35.1663,-89.9601
+mesa-az,Mesa,AZ,33.3806,-111.8849
+miami-fl,Miami,FL,25.6707,-80.3625
+milwaukee-wi,Milwaukee,WI,43.0445,-87.9072
+minneapolis-mn,Minneapolis,MN,44.9888,-93.3578
+mobile-al,Mobile,AL,30.6673,-88.1568
+monroe-la,Monroe,LA,32.5006,-92.1055
+nashville-tn,Nashville,TN,36.1674,-86.7952
+new-bern-nc,New Bern,NC,35.1081,-77.1143
+new-haven-ct,New Haven,CT,41.3503,-72.9207
+new-orleans-la,New Orleans,LA,29.9949,-89.9559
+new-york-ny,New York,NY,40.7678,-73.9788
+norfolk-va,Norfolk,VA,36.9074,-76.2495
+oklahoma-city-ok,Oklahoma City,OK,35.5059,-97.468
+omaha-ne,Omaha,NE,41.2712,-96.0918
+orange-park-fl,Orange Park,FL,30.0394,-81.8
+orlando-fl,Orlando,FL,28.5163,-81.2908
+ottumwa-ia,Ottumwa,IA,41.0309,-92.4098
+panama-city-fl,Panama City,FL,30.2082,-85.6884
+philadelphia-pa,Philadelphia,PA,39.9984,-75.1353
+phoenix-az,Phoenix,AZ,33.302,-112.1522
+pittsburgh-pa,Pittsburgh,PA,40.4231,-80.0307
+portland-or,Portland,OR,45.5315,-122.5651
+providence-ri,Providence,RI,41.8292,-71.4343
+pueblo-co,Pueblo,CO,38.1758,-104.6146
+reno-nv,Reno,NV,39.9141,-119.6958
+rhode-island-ri,Rhode Island,RI,41.8292,-71.4343
+richmond-va,Richmond,VA,37.5366,-77.4875
+roanoke-va,Roanoke,VA,37.2817,-79.9617
+sacramento-ca,Sacramento,CA,38.4296,-121.4452
+salinas-ca,Salinas,CA,36.5258,-121.4029
+salt-lake-city-ut,Salt Lake City,UT,40.7029,-111.8882
+san-antonio-tx,San Antonio,TX,29.4099,-98.4767
+san-diego-ca,San Diego,CA,32.8942,-116.9943
+san-francisco-ca,San Francisco,CA,37.7763,-122.6105
+san-juan-pr,San Juan,PR,18.4153,-66.0603
+san-luis-obispo-ca,San Luis Obispo,CA,35.3231,-120.5297
+savannah-ga,Savannah,GA,32.0078,-81.0962
+seattle-wa,Seattle,WA,47.4513,-121.8415
+sedalia-mo,Sedalia,MO,38.7139,-93.2609
+shreveport-la,Shreveport,LA,32.5603,-93.7649
+sioux-falls-sd,Sioux Falls,SD,43.6224,-96.7561
+south-bend-in,South Bend,IN,41.6568,-86.2764
+spokane-wa,Spokane,WA,47.6637,-117.4207
+springfield-mo,Springfield,MO,37.2103,-93.3121
+st-louis-mo,St. Louis,MO,38.642,-90.2923
+st-paul-mn,St. Paul,MN,44.9687,-93.1039
+st-petersburg-fl,St. Petersburg,FL,27.8392,-82.7053
+sweetwater-tx,Sweetwater,TX,32.3083,-100.4045
+syracuse-ny,Syracuse,NY,43.0437,-76.1644
+tallahassee-fl,Tallahassee,FL,30.4567,-84.3005
+tampa-fl,Tampa,FL,27.9316,-82.4604
+toledo-oh,Toledo,OH,41.6745,-83.525
+topeka-ks,Topeka,KS,39.0412,-95.7473
+tucson-az,Tucson,AZ,32.153,-111.1981
+tulsa-ok,Tulsa,OK,36.1328,-95.9687
+tyler-tx,Tyler,TX,32.3722,-95.282
+waco-tx,Waco,TX,31.5512,-97.176
+washington-dc,Washington,DC,38.8953,-77.0195
+west-palm-beach-fl,West Palm Beach,FL,26.6474,-80.3145
+wichita-ks,Wichita,KS,37.6813,-97.367
+wichita-falls-tx,Wichita Falls,TX,33.9102,-98.5404
+wilmington-nc,Wilmington,NC,34.1499,-77.8808
+youngstown-oh,Youngstown,OH,41.0699,-80.6946
