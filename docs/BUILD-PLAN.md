@@ -2,7 +2,7 @@
 
 Branch: `claude/android`  
 Status: **ready to execute one milestone at a time**  
-Authority: follow `docs/DECISIONS.md` (owner-approved 2026-11-05). `docs/PLAN.md` remains the feasibility audit; where the two disagree, **DECISIONS wins**.
+Authority: follow `docs/DECISIONS.md` for stacks, caching, branches, and EPGTalk posture (owner-approved 2026-11-05). **Monetization in this file supersedes** the older “none in v1” line in DECISIONS — update DECISIONS in a later docs commit to match. `docs/PLAN.md` remains the feasibility audit; where PLAN and this file disagree on product rules, **this build plan + DECISIONS (as amended here) win**.
 
 Goal: ship a usable Android app on top of the existing JVM `:core` module, then port to iOS. This document is the Android track only. Do **not** merge to `main` without owner approval.
 
@@ -12,15 +12,27 @@ Goal: ship a usable Android app on top of the existing JVM `:core` module, then 
 
 Do these before writing `:app` code. They are not blockers for scaffolding, but they are blockers for a public or store release.
 
-| Item | Current decision (`docs/DECISIONS.md`) | What to confirm / do |
+| Item | Current decision | What to confirm / do |
 |---|---|---|
-| **EPGTalk licensing** | Maintainer will **not** be contacted. Keep use **personal-scale and conservative**. | Treat as open risk for any non-personal release. Fetch only from the public feed URL (config), cache **on device**, refresh at most daily. Make the feed URL easy to swap. Do not redistribute EPGTalk data from our own host/CDN. |
+| **EPGTalk licensing** | Maintainer will **not** be contacted (`docs/DECISIONS.md`). Keep use **personal-scale and conservative**. | Treat as open risk for any non-personal release. Fetch only from the public feed URL (config), cache **on device**, refresh at most daily. Make the feed URL easy to swap. Do not redistribute EPGTalk data from our own host/CDN. |
 | Caching | **On-device cache only.** No server-side mirror. | Stick to Room (+ optional raw XML file on disk). No GitHub Releases/Pages mirror. |
-| Monetization | **None in v1.** | No AdMob / banner code. Ignore PLAN.md § ads risk for v1. |
+| **Monetization (authoritative)** | See below. **Banner ads are explicitly REJECTED** — do not add banner/interstitial inventory or bottom-banner UI in any milestone. | Implement only: (1) rewarded day-pass, (2) one-time unlock, (3) Touch-family subscription. Record product IDs and Play Billing / AdMob (rewarded-only) setup before Milestone 7. Sync `docs/DECISIONS.md` when convenient. |
 | Feed window | EPGTalk US local ≈ **72 hours**, ~140 markets. | Bound right-arrow / day picker with `GuideLogic.dataEnd`. Do not hard-code 7 days. |
 | Zip → market | Still needed (PLAN audit). | Bundle a static zip→DMA/market table (public-domain-derived). Verify source attribution before store. |
 | Provider lineups | EPGTalk is market-based, not provider-lineup-based. | Setup: market + curated streaming providers; channel numbers from feed; user customization covers gaps. |
-| Privacy / store | Coarse location only for zip; no accounts. | Short privacy policy required before Play listing (Milestone 7). |
+| Privacy / store | Coarse location only for zip; no accounts. | Short privacy policy required before Play listing (Milestone 8). Disclose rewarded ads + Play Billing in data-safety / policy text. |
+
+### Monetization model (do not reintroduce banners)
+
+**Banner ads (and other persistent display ads) are explicitly rejected for this app.** Future work must not add banner units, sticky bottom ads, or “banner for revenue” variants. PLAN.md historical notes about bottom banner ads are obsolete for this product.
+
+Allowed paths only:
+
+1. **Rewarded ads (day pass):** User watches **four** ~**30-second** rewarded ads → unlock the **complete** app for **one day** (local calendar day or rolling 24h — pick one in M7 and document it; default recommendation: rolling 24h from fourth completion).
+2. **One-time purchase:** Buy the app outright (non-consumable Play product) → permanent unlock on that Google account / license.
+3. **Subscription:** A subscription that covers **all Touch family apps** (shared entitlement). This app must recognize the family sub as fully unlocked; product/SKU naming and cross-app verification are part of Milestone 7.
+
+Locked / free tier behavior (define precisely in M7): until unlocked, allow setup + limited preview as needed for conversion; do not show banners while locked.
 
 **Already done (do not redo):**
 
@@ -30,7 +42,7 @@ Do these before writing `:app` code. They are not blockers for scaffolding, but 
 - CI — `.github/workflows/android.yml` runs `gradle :core:test` on `claude/android`
 - Root Gradle — `settings.gradle.kts` includes `:core` and notes `:app` as next; `build.gradle.kts` applies Kotlin JVM 2.0.21; `core/build.gradle.kts` is JVM 17
 
-**Not in tree yet:** Gradle wrapper, `:app`, Android plugin, Compose, Room, networking, any UI.
+**Not in tree yet:** Gradle wrapper, `:app`, Android plugin, Compose, Room, networking, any UI, billing, or ad SDKs.
 
 ---
 
@@ -82,6 +94,7 @@ Do these before writing `:app` code. They are not blockers for scaffolding, but 
    - Feed: channels, programs (program PK = `channelId|startMillis` per `Program.key()`).
    - User: customization maps (numbers, categories), favorite channel/program sets, single `HomeProfile` row.
    - Metadata: last-fetch timestamp, feed URL / market id used.
+   - Leave room (schema) for unlock state used later in Milestone 7 (day-pass expiry, owned license flags) — or add those tables in M7; either is fine if documented.
 3. DAOs: replace-all for a market refresh; query programs by channel + time window; load/save customization and home.
 4. Repository layer in `:app` that:
    - Reads Room → builds `GuideData` + `Customization`
@@ -135,7 +148,7 @@ Do these before writing `:app` code. They are not blockers for scaffolding, but 
 
 ## Milestone 4 — Compose guide grid UI
 
-**Why next:** First visible product surface. Until Milestone 5, use a debug default market / last-fetched data (or “open guide” with empty-state CTA).
+**Why next:** First visible product surface. Until Milestone 5, use a debug default market / last-fetched data (or “open guide” with empty-state CTA). Until Milestone 7, debug builds may treat the app as unlocked for development.
 
 ### Tasks
 
@@ -151,6 +164,7 @@ Do these before writing `:app` code. They are not blockers for scaffolding, but 
 8. Coil for `logoUrl` when present.
 9. Loading / empty / error states wired to repository + fetch.
 10. (Stretch in this milestone or early M6) Search using `GuideLogic.search`.
+11. **Do not** reserve layout space for banners or add any display-ad placeholders.
 
 ### Reuse
 
@@ -165,6 +179,7 @@ Do these before writing `:app` code. They are not blockers for scaffolding, but 
 - [ ] Category filter and favorites match GuideLogic behavior covered by `CoreTest`.
 - [ ] Assigning a duplicate number forces the other channel to `?` and persists after process death.
 - [ ] Works offline from Room.
+- [ ] No banner / display-ad UI in the layout.
 
 ---
 
@@ -226,31 +241,81 @@ Do these before writing `:app` code. They are not blockers for scaffolding, but 
 
 ---
 
-## Milestone 7 — Store packaging
+## Milestone 7 — Monetization (rewarded day-pass, one-time buy, Touch-family subscription)
 
-Only after M1–M6 are solid enough for a personal or closed test track. Respect EPGTalk **personal-scale** posture until licensing is clearer.
+**Why here:** Core product (guide, setup, reminders) should work first; then gate “complete app” behind the three approved unlock paths. **Banner ads remain forbidden** in this milestone and afterward.
+
+### Tasks
+
+1. **Entitlement model** (Room + in-memory):
+   - States: `locked` | `dayPass(expiresAt)` | `owned` (one-time) | `familySub(active)`.
+   - Single `isUnlocked()` used by UI/navigation; purchase and sub beat day-pass.
+   - Persist day-pass expiry locally; re-validate Play entitlements on launch and on BillingClient reconnect.
+2. **Rewarded ads — four × ~30s → one day unlock:**
+   - Integrate a **rewarded-only** ad SDK path (e.g. Google Mobile Ads rewarded units). **Do not** register banner, native, or interstitial units.
+   - Paywall / unlock screen: progress “0/4 … 4/4”; each completed rewarded callback increments; cancel/fail does not count.
+   - On 4/4: set day-pass expiry (document rolling 24h vs calendar day; prefer rolling 24h).
+   - After expiry, return to locked; ads can be watched again the same way.
+   - Debug/test ads for automated and manual QA.
+3. **One-time purchase (buy the app):**
+   - Play Billing Library: non-consumable product (SKU TBD, e.g. `touch_tv_guide_unlock`).
+   - Purchase flow, acknowledge, grant `owned`; restore purchases on new device / reinstall.
+4. **Touch family subscription:**
+   - Subscription product (SKU TBD) that unlocks **all Touch family apps**.
+   - This app queries Play for that sub (and/or a shared license signal documented for the family) and treats an active sub as full unlock.
+   - Handle grace period / account hold per Play policies; when sub lapses, fall back to owned → day-pass → locked.
+   - Document how other Touch apps will share the same product IDs / verification approach (even if those apps are not built yet).
+5. **Paywall UI:** Clear choices — Watch 4 ads (day), Buy once, Subscribe (Touch family). No banner creatives anywhere on this screen.
+6. **Gate:** Wire `isUnlocked()` so complete features require unlock; keep enough preview that setup/feed still demonstrate value. Debug build flag to force unlocked for engineering.
+7. Privacy / Play: disclose ads (rewarded) and in-app purchases; no under-13 targeting assumptions without owner sign-off.
+8. Tests: entitlement priority (sub > owned > day-pass > locked); day-pass expiry; purchase restore; “banner unit must not exist” checklist in PR template or code review notes.
+
+### Reuse
+
+- App navigation/settings from M4–M6
+- Room from M2 for persisting day-pass expiry / cached entitlement flags
+- This section’s monetization rules (not PLAN.md banner notes; not DECISIONS “none in v1”)
+
+### Acceptance criteria
+
+- [ ] Completing **four** rewarded ads unlocks the complete app until day-pass expiry; partial watches do not unlock.
+- [ ] One-time purchase unlocks permanently (for that license) and restores after reinstall.
+- [ ] Active Touch-family subscription unlocks this app without extra purchase; lapse removes sub entitlement only.
+- [ ] Entitlement priority: family sub / one-time ownership outrank day-pass; no double-charge confusion in UI copy.
+- [ ] **Zero banner (or other persistent display) ad units** in code, layouts, or AdMob console config for this app.
+- [ ] Locked users never see banner placeholders; only the rewarded/paywall flows above.
+- [ ] Debug unlock flag works for CI/manual testing without real charges.
+
+---
+
+## Milestone 8 — Store packaging
+
+Only after M1–M7 are solid enough for a personal or closed test track. Respect EPGTalk **personal-scale** posture until licensing is clearer. Monetization (M7) should be testable on an internal track before wide release.
 
 ### Tasks
 
 1. Application id, versionCode/versionName, release signing config (secrets via CI or local; never commit keystore).
-2. ProGuard/R8 keep rules for Room / Kotlin if minify enabled.
+2. ProGuard/R8 keep rules for Room / Kotlin / Billing / rewarded ads SDK if minify enabled.
 3. Adaptive icon, label “Touch TV Guide”, theme colors/font-size settings if still required by spec (can be minimal).
-4. Privacy policy URL (zip/location use, on-device cache, no accounts, data source disclosure).
-5. Play Console listing: short/full description, screenshots, content rating, data safety form.
-6. CI: `assembleRelease` (unsigned or with secrets); optional Play upload later.
-7. Deep links to provider apps (optional, PLAN §11): package intents; best-effort.
-8. Final pass: missing-data states, theme, font size, search polish from PLAN milestone 6.
+4. Privacy policy URL (zip/location use, on-device cache, no accounts, data source disclosure, **rewarded ads**, **Play Billing** / subscription).
+5. Play Console listing: short/full description, screenshots, content rating, data safety form; declare IAP + ads (rewarded only).
+6. Create Play products: one-time unlock + Touch-family subscription; link rewarded ad unit IDs for release.
+7. CI: `assembleRelease` (unsigned or with secrets); optional Play upload later.
+8. Deep links to provider apps (optional, PLAN §11): package intents; best-effort.
+9. Final pass: missing-data states, theme, font size, search polish from PLAN milestone 6.
+10. Confirm release binary has **no banner ad dependency or layout**.
 
 ### Reuse
 
-- Entire `:app` + `:core` stack
-- DECISIONS: no ads v1; no merge to `main` without approval
+- Entire `:app` + `:core` stack + Milestone 7 entitlements
+- Branch policy: no merge to `main` without approval
 
 ### Acceptance criteria
 
 - [ ] Signed release (or Play internal testing) APK/AAB installs and completes setup → guide → reminder on a physical device.
-- [ ] Privacy policy and data-safety answers match actual behavior (on-device only).
-- [ ] No ad SDKs in the binary.
+- [ ] Privacy policy and data-safety answers match actual behavior (on-device cache, rewarded ads, IAP/sub).
+- [ ] Internal testers can exercise rewarded 4-ad day-pass, one-time buy, and subscription unlock.
+- [ ] No banner/display ad SDK usage in the release configuration.
 - [ ] Owner explicitly approves any PR to `main` and any public listing.
 
 ---
@@ -258,22 +323,24 @@ Only after M1–M6 are solid enough for a personal or closed test track. Respect
 ## Suggested working order (checklist)
 
 ```
-Pre-build notes acknowledged (EPGTalk conservative use)
+Pre-build notes acknowledged (EPGTalk conservative use; banners rejected; monetization model locked)
 → M1 Wrapper + :app scaffold + CI assembleDebug
 → M2 Room + repository + GuideLogic wiring
 → M3 Fetch + XmltvParser + WorkManager
-→ M4 Compose guide grid (+ light customization)
+→ M4 Compose guide grid (+ light customization; no banner chrome)
 → M5 Setup / Home profile
 → M6 Reminders
-→ M7 Store packaging / policy
+→ M7 Monetization (rewarded 4×30s day-pass, one-time buy, Touch-family sub)
+→ M8 Store packaging / policy / Play products
 → (Later) iOS port from docs/DATA_MODEL.md + CoreTest cases on claude/ios
+→ (Docs follow-up) Align docs/DECISIONS.md monetization with this plan
 ```
 
 ## Out of scope for this Android-first plan
 
 - iOS implementation (separate track on `claude/ios` after Android is usable)
 - Server-side EPG mirror / CDN
-- Ads / IAP
+- **Banner ads, interstitial ads, or any persistent display ads** (explicitly rejected)
 - Contacting the EPGTalk maintainer
 - Merging to `main` without owner approval
 
@@ -286,6 +353,7 @@ Pre-build notes acknowledged (EPGTalk conservative use)
 | M5 | PLAN M2 (setup / Home) |
 | M4 | PLAN M3–M4 (grid + customization) |
 | M6 | PLAN M5 (reminders; deep links optional) |
-| M7 + polish | PLAN M6 (search/settings/store) |
+| M7 | Monetization (replaces PLAN “bottom banner ads”; rewarded + IAP + family sub) |
+| M8 + polish | PLAN M6 (search/settings/store) |
 
-PLAN.md status line still says “PROPOSED”; treat **DECISIONS.md** as the approved gate for stacks, caching, monetization, and branch policy. Update PLAN.md status in a later docs commit if the owner wants the audit file marked approved.
+PLAN.md status line still says “PROPOSED”; treat **DECISIONS.md** (stacks/caching/EPGTalk) plus **this file’s monetization section** as the approved product gate. Update PLAN.md / DECISIONS.md in a later docs commit so they no longer mention banner ads or “none in v1.”
