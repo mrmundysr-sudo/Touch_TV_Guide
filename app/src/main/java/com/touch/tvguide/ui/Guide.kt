@@ -9,6 +9,7 @@ import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalDensity
@@ -40,8 +41,9 @@ fun GuideScreen(
     var filter by rememberSaveable { mutableStateOf<String?>(null) }
     val categories = remember(s.data.channels, s.cu) { s.data.channels.mapNotNull { GuideLogic.category(it, s.cu) }.distinctBy { it.lowercase() }.sorted() }
     if (filter != null && filter != "★" && filter !in categories) filter = null
-    val shown = remember(sorted, filter, s.cu) {
-        when (filter) { null -> sorted; "★" -> GuideLogic.favorites(s.data.channels, s.cu); else -> GuideLogic.byCategory(s.data.channels, s.cu, filter!!) }
+    val activeFilter = filter
+    val shown = remember(sorted, activeFilter, s.cu) {
+        when (activeFilter) { null -> sorted; "★" -> GuideLogic.favorites(s.data.channels, s.cu); else -> GuideLogic.byCategory(s.data.channels, s.cu, activeFilter) }
     }
 
     var detail by remember { mutableStateOf<Pair<Channel, Program>?>(null) }
