@@ -1,6 +1,6 @@
 # Touch TV Guide — Feasibility Audit & Scoped Plan
 
-Status: **PROPOSED — awaiting owner approval before any app code.**
+Status: **Historical feasibility audit — superseded by `docs/DECISIONS.md`, `docs/EPGTALK_PERMISSION.md` and the implementation.** The statements below about contacting the maintainer, mirroring, and banner ads are obsolete: the owner reports EPGTalk approval was obtained (terms still to be recorded), there is no mirror, and the app has no ads.
 Source: Touch TV Guide Companion App spec v1.0 (locked).
 
 ## 1. Audit findings

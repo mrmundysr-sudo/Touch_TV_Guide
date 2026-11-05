@@ -1,0 +1,56 @@
+name: iOS CI
+on:
+  push:
+    branches: ['claude/ios', 'claude/ios-*']
+  workflow_dispatch:
+jobs:
+  build-and-test:
+    runs-on: macos-15
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - name: Toolchain
+        run: |
+          xcodebuild -version
+          swift --version
+      - name: Install XcodeGen
+        run: brew install xcodegen
+      - name: Core package tests (parser, rules, repository)
+        working-directory: Packages/TVGuideCore
+        run: swift test 2>&1 | tee ../../core-tests.log
+      - name: Generate Xcode project
+        run: xcodegen generate
+      - name: Pick an iPhone simulator
+        id: sim
+        run: |
+          name=$(xcrun simctl list devices available | grep -E "iPhone [0-9]+ \(" | head -1 | sed -E 's/^ *(iPhone [^(]*[^ (]) \(.*/\1/')
+          echo "device=$name" >> "$GITHUB_OUTPUT"; echo "Using: $name"
+      - name: Build and test app (iPhone simulator)
+        run: |
+          set -o pipefail
+          xcodebuild test -project TouchTVGuide.xcodeproj -scheme TouchTVGuide \
+            -destination "platform=iOS Simulator,name=${{ steps.sim.outputs.device }}" \
+            CODE_SIGNING_ALLOWED=NO -resultBundlePath TestResults.xcresult 2>&1 | tee app-tests.log | xcpretty || true
+          grep -E "\*\* TEST (SUCCEEDED|FAILED) \*\*" app-tests.log
+          grep -q "TEST SUCCEEDED" app-tests.log
+      - name: Release configuration compile check (live feed gate OFF)
+        run: |
+          set -o pipefail
+          xcodebuild build -project TouchTVGuide.xcodeproj -scheme TouchTVGuide -configuration Release \
+            -destination "generic/platform=iOS Simulator" CODE_SIGNING_ALLOWED=NO -derivedDataPath build-release 2>&1 | tail -5
+          plutil -extract TVGLiveFeedEnabled raw "build-release/Build/Products/Release-iphonesimulator/Touch TV Guide.app/Info.plist" | grep -qx NO
+      - name: Package simulator build (unsigned)
+        run: |
+          cd "build-release/Build/Products/Release-iphonesimulator" && zip -qr "$GITHUB_WORKSPACE/TouchTVGuide-simulator-Release.zip" "Touch TV Guide.app"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ios-logs-and-results
+          path: |
+            core-tests.log
+            app-tests.log
+            TestResults.xcresult
+      - uses: actions/upload-artifact@v4
+        with:
+          name: TouchTVGuide-simulator-Release-unsigned
+          path: TouchTVGuide-simulator-Release.zip
