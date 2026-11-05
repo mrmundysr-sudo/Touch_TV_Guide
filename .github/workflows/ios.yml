@@ -27,12 +27,15 @@ jobs:
           echo "device=$name" >> "$GITHUB_OUTPUT"; echo "Using: $name"
       - name: Build and test app (iPhone simulator)
         run: |
-          set -o pipefail
+          set +e
           xcodebuild test -project TouchTVGuide.xcodeproj -scheme TouchTVGuide \
             -destination "platform=iOS Simulator,name=${{ steps.sim.outputs.device }}" \
-            CODE_SIGNING_ALLOWED=NO -resultBundlePath TestResults.xcresult 2>&1 | tee app-tests.log | xcpretty || true
-          grep -E "\*\* TEST (SUCCEEDED|FAILED) \*\*" app-tests.log
-          grep -q "TEST SUCCEEDED" app-tests.log
+            CODE_SIGNING_ALLOWED=NO -resultBundlePath TestResults.xcresult > app-tests.log 2>&1
+          status=$?
+          echo "xcodebuild exit status: $status"
+          echo "---- errors ----"; grep -E "error:|\*\* (TEST|BUILD) " app-tests.log | sort -u | head -80
+          echo "---- test summary ----"; grep -E "Test Suite '.*' (passed|failed)|Executed [0-9]+ tests|Test Case .* failed" app-tests.log | tail -40
+          exit $status
       - name: Release configuration compile check (live feed gate OFF)
         run: |
           set -o pipefail
