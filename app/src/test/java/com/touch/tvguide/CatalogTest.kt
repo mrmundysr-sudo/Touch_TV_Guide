@@ -11,7 +11,7 @@ import kotlin.test.*
 /** Checks the real bundled assets, not fixtures. */
 @RunWith(RobolectricTestRunner::class)
 class CatalogTest {
-    private val catalog = Catalog(ApplicationProvider.getApplicationContext())
+    private val catalog = Catalog(ApplicationProvider.getApplicationContext<android.content.Context>())
 
     @Test fun bundledMarketsAndZips() {
         assertTrue(catalog.markets.size >= 130, "markets=${catalog.markets.size}")
