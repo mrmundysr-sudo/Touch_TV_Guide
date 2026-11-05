@@ -1,5 +1,6 @@
 import SwiftUI
 import UIKit
+import TVGuideCore
 
 /// Colours match the Android app (navy + gold). Dynamic: light and dark variants.
 enum Palette {
