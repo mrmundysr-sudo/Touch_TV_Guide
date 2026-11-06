@@ -39,12 +39,12 @@ jobs:
           echo "---- errors ----"; grep -E "error:|\*\* (TEST|BUILD) " app-tests.log | sort -u | head -80
           echo "---- test summary ----"; grep -E "Test Suite '.*' (passed|failed)|Executed [0-9]+ tests|Test Case .* failed" app-tests.log | tail -40
           exit $status
-      - name: Release configuration compile check (live feed gate OFF)
+      - name: Release configuration compile check (live feed gate ON)
         run: |
           set -o pipefail
           xcodebuild build -project TouchTVGuide.xcodeproj -scheme TouchTVGuide -configuration Release \
             -destination "generic/platform=iOS Simulator" CODE_SIGNING_ALLOWED=NO -derivedDataPath build-release 2>&1 | tail -5
-          plutil -extract TVGLiveFeedEnabled raw "build-release/Build/Products/Release-iphonesimulator/TouchTVGuide.app/Info.plist" | grep -qx NO
+          plutil -extract TVGLiveFeedEnabled raw "build-release/Build/Products/Release-iphonesimulator/TouchTVGuide.app/Info.plist" | grep -qx YES
       - name: Archive check (unsigned, proves the TestFlight archive configuration builds)
         run: |
           set -o pipefail

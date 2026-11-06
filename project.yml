@@ -12,13 +12,11 @@ settings:
     TARGETED_DEVICE_FAMILY: "1"          # iPhone
     CODE_SIGN_STYLE: Automatic
     # --- Feed gate -------------------------------------------------------------------------------
-    # YES: the app may download the live EPGTalk guide. NO: only the labelled Sample preview data is available.
-    # Release stays NO until the owner confirms EPGTalk permission and the terms are recorded in
-    # docs/EPGTALK_PERMISSION.md (see docs/FEED_CONFIGURATION.md).
-    TVG_LIVE_FEED_ENABLED: "NO"
-  configs:
-    Debug:
-      TVG_LIVE_FEED_ENABLED: "YES"
+    # YES: the app downloads the live EPGTalk guide. NO: only the labelled Sample preview data is available.
+    # Owner decision (2026-11-06): live listings stay ON for the owner's TestFlight testing while the EPGTalk
+    # reply is pending. The written terms are still NOT recorded (docs/EPGTALK_PERMISSION.md), so set this to
+    # "NO" again before any public release / external testers unless the terms allow it.
+    TVG_LIVE_FEED_ENABLED: "YES"
 packages:
   TVGuideCore:
     path: Packages/TVGuideCore

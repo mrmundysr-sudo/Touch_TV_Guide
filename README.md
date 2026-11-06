@@ -17,7 +17,7 @@ xcodebuild test -project TouchTVGuide.xcodeproj -scheme TouchTVGuide \
 Open `TouchTVGuide.xcodeproj` in Xcode to run in the simulator. CI: `.github/workflows/ios.yml` (macOS runner, no signing).
 
 ## Data source
-Listings come from EPGTalk. The owner reports approval, but the written terms are not yet in the repo, so **Release builds show clearly labelled sample data only** and **Debug builds can use the live feed**. See `docs/EPGTALK_PERMISSION.md` and `docs/FEED_CONFIGURATION.md` for exactly what to change once the terms are recorded.
+Listings come from EPGTalk. The owner reports approval, but the written terms are not yet in the repo, so the live feed is **on for the owner's testing** (owner decision, 2026-11-06) while EPGTalk's reply is pending; sample data stays available in Settings. Keep to internal testers until the terms are recorded. See `docs/EPGTALK_PERMISSION.md` and `docs/FEED_CONFIGURATION.md` for exactly what to change once the terms are recorded.
 
 ## Permissions
 * Location (optional, when-in-use, approximate, used once for a zip suggestion) — explained in-app before the system prompt.

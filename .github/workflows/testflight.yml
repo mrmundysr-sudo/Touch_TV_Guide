@@ -3,8 +3,8 @@ name: TestFlight upload
 on:
   workflow_dispatch:
     inputs:
-      live_feed:
-        description: "Build with the LIVE EPGTalk feed enabled (owner's internal testing). Off = sample data only."
+      sample_only:
+        description: "Build with sample data only (live EPGTalk feed OFF). Default: live feed ON for owner testing."
         type: boolean
         default: false
 jobs:
@@ -43,7 +43,7 @@ jobs:
         run: |
           set -o pipefail
           LIVE=""
-          if [ "${{ inputs.live_feed }}" = "true" ]; then LIVE="TVG_LIVE_FEED_ENABLED=YES"; echo "Live EPGTalk feed ENABLED for this build (owner-requested)."; fi
+          if [ "${{ inputs.sample_only }}" = "true" ]; then LIVE="TVG_LIVE_FEED_ENABLED=NO"; echo "Sample data only for this build."; fi
           xcodebuild archive -project TouchTVGuide.xcodeproj -scheme TouchTVGuide -configuration Release \
             -destination "generic/platform=iOS" -archivePath "$RUNNER_TEMP/TouchTVGuide.xcarchive" \
             -allowProvisioningUpdates \

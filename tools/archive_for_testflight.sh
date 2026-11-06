@@ -1,15 +1,15 @@
 #!/usr/bin/env bash
 # One command from a Mac that is signed in to Xcode with your Apple ID:
-#   tools/archive_for_testflight.sh YOURTEAMID          # sample-data build (safe default)
-#   tools/archive_for_testflight.sh YOURTEAMID live     # live EPGTalk feed, for your own testing
+#   tools/archive_for_testflight.sh YOURTEAMID          # live EPGTalk feed (default, owner testing)
+#   tools/archive_for_testflight.sh YOURTEAMID sample   # sample data only
 # Builds, signs (automatic), and uploads to App Store Connect / TestFlight. No secrets, no API key.
 set -euo pipefail
-TEAM="${1:?Usage: $0 YOURTEAMID [live]}"
+TEAM="${1:?Usage: $0 YOURTEAMID [sample]}"
 cd "$(dirname "$0")/.."
 command -v xcodegen >/dev/null || brew install xcodegen
 xcodegen generate
 BUILD="$(date +%Y%m%d%H%M)"      # every upload needs a new build number
-LIVE=""; if [ "${2:-}" = "live" ]; then LIVE="TVG_LIVE_FEED_ENABLED=YES"; echo "Live EPGTalk feed ENABLED for this build."; fi
+LIVE=""; if [ "${2:-}" = "sample" ]; then LIVE="TVG_LIVE_FEED_ENABLED=NO"; echo "Sample data only for this build."; fi
 OUT="build/testflight"; rm -rf "$OUT"; mkdir -p "$OUT"
 xcodebuild archive -project TouchTVGuide.xcodeproj -scheme TouchTVGuide -configuration Release \
   -destination "generic/platform=iOS" -archivePath "$OUT/TouchTVGuide.xcarchive" -allowProvisioningUpdates \

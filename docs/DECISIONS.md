@@ -3,7 +3,7 @@
 ## Approved (owner)
 * Free TV guide companion: listings, reminders, provider/channel info. It does **not** play TV or video.
 * Data: EPGTalk public feeds, fetched directly, **cached on device only**, no server mirror/redistribution, URL configurable, **refresh at most once a day**; ~72 h coverage, so navigation is bounded by the data.
-* **EPGTalk approval:** the owner reports approval was obtained from an EPGTalk representative; the written terms are **not in this repo**. See `docs/EPGTALK_PERMISSION.md`. Until they are recorded, Release builds ship with the live feed **off** (sample data only) and the UI makes no claim of permission.
+* **EPGTalk approval:** the owner reports approval was obtained from an EPGTalk representative; the written terms are **not in this repo**. See `docs/EPGTALK_PERMISSION.md`. Owner decision (2026-11-06): the live feed is **on** in all builds so the owner can test on TestFlight while the EPGTalk reply to the owner's email is pending. The terms are still unrecorded, so keep to internal testers, set `TVG_LIVE_FEED_ENABLED` back to `NO` if EPGTalk declines, and the UI still makes no claim of permission.
 * No banner/interstitial/persistent display ads, no monetization, no accounts, no tracking, no secrets.
 * SwiftUI, iOS 17+, iPhone. No signing/TestFlight/App Store/merge to `main` without explicit owner approval.
 

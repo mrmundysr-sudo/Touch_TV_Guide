@@ -5,7 +5,7 @@ Needs a Mac with Xcode 16+, signed in to Xcode with your Apple ID (Xcode → Set
 ```bash
 git clone -b claude/ios https://github.com/mrmundysr-sudo/Touch_TV_Guide.git && cd Touch_TV_Guide && tools/archive_for_testflight.sh YOURTEAMID
 ```
-Add `live` after the Team ID for a build with the live EPGTalk feed (your own testing). Then add yourself as an internal tester (step 4) and open TestFlight on your iPhone.
+Builds use the live EPGTalk feed by default (owner decision while testing). Add `sample` after the Team ID for a sample-data-only build. Then add yourself as an internal tester (step 4) and open TestFlight on your iPhone.
 
 ## Alternative: GitHub Actions (needs an App Store Connect API key stored as secrets)
 
@@ -29,8 +29,8 @@ Everything the repo can do is done: the app archives cleanly (CI proves it unsig
 
 ## Each build
 GitHub → Actions → **TestFlight upload** → Run workflow on `claude/ios`.
-* Leave **live_feed** off for sample data only (the safe default).
-* Tick **live_feed** to build with the live EPGTalk feed for *your own* internal testing. This is the owner's explicit choice; the EPGTalk terms are still to be recorded in `docs/EPGTALK_PERMISSION.md` before any public release.
+* Builds use the live EPGTalk feed by default (owner decision, 2026-11-06, for internal testing).
+* Tick **sample_only** for a sample-data-only build. The EPGTalk terms are still to be recorded in `docs/EPGTALK_PERMISSION.md`; keep to internal testers until then.
 After the run is green, wait ~5–15 minutes for App Store Connect to process the build, then open TestFlight on the iPhone and install it. Internal testers need no Beta App Review.
 
 ## What the workflow does
