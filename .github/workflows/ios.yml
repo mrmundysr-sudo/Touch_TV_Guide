@@ -45,6 +45,15 @@ jobs:
           xcodebuild build -project TouchTVGuide.xcodeproj -scheme TouchTVGuide -configuration Release \
             -destination "generic/platform=iOS Simulator" CODE_SIGNING_ALLOWED=NO -derivedDataPath build-release 2>&1 | tail -5
           plutil -extract TVGLiveFeedEnabled raw "build-release/Build/Products/Release-iphonesimulator/TouchTVGuide.app/Info.plist" | grep -qx NO
+      - name: Archive check (unsigned, proves the TestFlight archive configuration builds)
+        run: |
+          set -o pipefail
+          xcodebuild archive -project TouchTVGuide.xcodeproj -scheme TouchTVGuide -configuration Release \
+            -destination "generic/platform=iOS" -archivePath build/TouchTVGuide.xcarchive \
+            CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO 2>&1 | tail -5
+          test -d build/TouchTVGuide.xcarchive/Products/Applications/TouchTVGuide.app
+          plutil -p build/TouchTVGuide.xcarchive/Products/Applications/TouchTVGuide.app/Info.plist | grep -E "CFBundleIdentifier|CFBundleIconName|MinimumOSVersion|ITSAppUsesNonExemptEncryption"
+          test -f build/TouchTVGuide.xcarchive/Products/Applications/TouchTVGuide.app/PrivacyInfo.xcprivacy
       - name: Package simulator build (unsigned)
         run: |
           cd "build-release/Build/Products/Release-iphonesimulator" && zip -qr "$GITHUB_WORKSPACE/TouchTVGuide-simulator-Release.zip" "TouchTVGuide.app"
