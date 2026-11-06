@@ -1,5 +1,14 @@
 # Getting Touch TV Guide onto TestFlight
 
+## Quickest: one paste on your Mac (same approach as Touch Schatzi)
+Needs a Mac with Xcode 16+, signed in to Xcode with your Apple ID (Xcode → Settings → Accounts), and the app record from step 1 below. No secrets, no API key.
+```bash
+git clone -b claude/ios https://github.com/mrmundysr-sudo/Touch_TV_Guide.git && cd Touch_TV_Guide && tools/archive_for_testflight.sh YOURTEAMID
+```
+Add `live` after the Team ID for a build with the live EPGTalk feed (your own testing). Then add yourself as an internal tester (step 4) and open TestFlight on your iPhone.
+
+## Alternative: GitHub Actions (needs an App Store Connect API key stored as secrets)
+
 Everything the repo can do is done: the app archives cleanly (CI proves it unsigned on every push), a privacy manifest and encryption/category metadata are in place, and `.github/workflows/testflight.yml` signs, archives and uploads in one manual run. Four things only the account owner can do:
 
 ## One-time setup (about 15 minutes)
