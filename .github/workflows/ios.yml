@@ -52,7 +52,7 @@ jobs:
             -destination "generic/platform=iOS" -archivePath build/TouchTVGuide.xcarchive \
             CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO 2>&1 | tail -5
           test -d build/TouchTVGuide.xcarchive/Products/Applications/TouchTVGuide.app
-          plutil -p build/TouchTVGuide.xcarchive/Products/Applications/TouchTVGuide.app/Info.plist | grep -E "CFBundleIdentifier|CFBundleIconName|MinimumOSVersion|ITSAppUsesNonExemptEncryption"
+          plutil -p build/TouchTVGuide.xcarchive/Products/Applications/TouchTVGuide.app/Info.plist | grep -E -A4 "CFBundleIdentifier|CFBundleIconName|MinimumOSVersion|ITSAppUsesNonExemptEncryption|UISupportedInterfaceOrientations"
           test -f build/TouchTVGuide.xcarchive/Products/Applications/TouchTVGuide.app/PrivacyInfo.xcprivacy
       - name: Package simulator build (unsigned)
         run: |
